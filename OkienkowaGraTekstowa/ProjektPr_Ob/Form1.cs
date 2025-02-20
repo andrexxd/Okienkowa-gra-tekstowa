@@ -323,9 +323,16 @@ namespace ProjektPr_Ob
                         DatabaseManager.Instance.OpenConnection(currentDatabaseDirectory, currentDatabaseName);
 
                         var progressValues = DatabaseManager.Instance.GetProgressValues();
-                        if (progressValues[0].IsGameWasLaunch)
+                        if (!progressValues[0].IsGameEnd)
                         {
-                            BTN_LoadGame.Enabled = true;
+                            if (progressValues[0].IsGameWasLaunch)
+                            {
+                                BTN_LoadGame.Enabled = true;
+                            }
+                            else
+                            {
+                                BTN_LoadGame.Enabled = false;
+                            }
                         }
                         else
                         {
@@ -2011,6 +2018,7 @@ namespace ProjektPr_Ob
         private void BTN_EPtoMNP_Click(object sender, EventArgs e)
         {
             ShowPanel(Panel_MainMenuPanel);
+            BTN_LoadGame.Enabled = false;
         }
 
         private void BTN_MapPanel_Click(object sender, EventArgs e)
